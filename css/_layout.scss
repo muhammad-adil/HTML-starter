@@ -1,0 +1,32 @@
+html, body {
+	font-size: $fontSize-base + px;
+	width: 100%;
+}
+
+body {
+	color: $textColor;
+	font-family: $fontFamily;
+	font-size: $fontSize-default / $fontSize-base + $fontUnit;
+	line-height: 1.6em;
+}
+
+h1 { font-size: 3.2rem; }
+
+h2 { font-size: 2.6rem; }
+
+a {
+	color: $linkColor;
+	
+	&:hover { color: $linkColor_hover; }
+	&:visited { color: $linkColor_visited; }
+	&:active { color: $linkColor_active; }
+}
+
+small { font-size: 1.2rem; }
+
+dt { font-weight: bold; }
+
+img {
+	display: block;
+	width: 100%;
+}

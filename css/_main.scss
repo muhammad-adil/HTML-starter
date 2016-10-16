@@ -1,0 +1,7 @@
+/* Common */
+.inner {
+	max-width: $width-base;
+	padding: 20px;
+	margin: 0 auto;
+	@include box;
+}

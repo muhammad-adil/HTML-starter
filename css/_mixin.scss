@@ -1,0 +1,91 @@
+@charset "utf-8";
+
+// クリアフィックス(clearとoverflowの使い分けが可能)
+@mixin clearfix($type: overflow) {
+	@if $type == overflow {
+		overflow: hidden;
+		
+	} @elseif $type == clear {
+		&:after{
+			display: block;
+			content: '';
+			clear: both;
+		}
+	}
+}
+
+// ボックスサイジングの省略指定
+@mixin box($type: border-box){
+	@if $type == cb { $type: content-box; }
+	-webkit-box-sizing: $type;
+	   -moz-box-sizing: $type;
+	        box-sizing: $type;
+}
+
+// ポジションの一括指定
+@mixin position($type: absolute, $top: false, $right: false, $bottom: false, $left: false, $z: false){
+	position: $type;
+	@if $top != false { top: $top; }
+	@if $right != false { right: $right; }
+	@if $bottom != false { bottom: $bottom; }
+	@if $left != false { left: $left; }
+	@if $z != false { z-index: $z; }
+}
+
+// ポジションでの上下左右中央揃え
+@mixin position-center($value: 0, $z: false){
+	margin: auto;
+	@include position($top: $value, $right: $value, $bottom: $value, $left: $value, $z: $z);
+}
+
+// コンテンツ内の上下中央揃え
+@mixin content-center($height: auto, $line: true, $beside: false){
+	height: $height;
+	@if $line == true { line-height: $height; }
+	@if $beside == true { text-align: center; }
+}
+
+// 正方形の生成(内部コンテンツの中央配置可能)
+@mixin square($size: auto, $center: true){
+	width: $size;
+	@include content-center($height: $size, $line: $center, $beside: $center);
+}
+
+// ボーダーラジウスの一括指定
+@mixin border-radius($num1: 0, $num2: none, $num3: none, $num4: none){
+	$topLeft: 0;
+	$topRight: 0;
+	$bottomLeft: 0;
+	$bottomRight: 0;
+	
+	@if $num2 == none {
+		$topLeft: $num1;
+		$topRight: $num1;
+		$bottomLeft: $num1;
+		$bottomRight: $num1;
+		
+	} @elseif $num3 == none {
+		$topLeft: $num1;
+		$topRight: $num1;
+		$bottomLeft: $num2;
+		$bottomRight: $num2;
+		
+	} @elseif $num4 == none {
+
+		$topLeft: $num1;
+		$topRight: $num2;
+		$bottomLeft: $num3;
+		$bottomRight: $num3;
+		
+	} @else {
+		$topLeft: $num1;
+		$topRight: $num2;
+		$bottomLeft: $num3;
+		$bottomRight: $num4;
+	}
+
+	border-top-left-radius: $topLeft;
+	border-top-right-radius: $topRight;
+	border-bottom-left-radius: $bottomLeft;
+	border-bottom-right-radius: $bottomRight;
+}
